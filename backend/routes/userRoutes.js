@@ -36,6 +36,14 @@ const validator = {
     body('name').trim().notEmpty().withMessage('Name is Required').escape(),
     body('isAdmin').isBoolean().withMessage('isAdmin value should be true/false'),
     param('id').exists().withMessage('Id is required').isMongoId().withMessage('Invalid Id')
+  ],
+  resetPasswordRequest: [
+    body('email').trim().notEmpty().withMessage('Email is Required').bail().isEmail().withMessage("Please enter a valid email address")
+  ],
+  resetPassword: [
+    body('password').trim().notEmpty().withMessage('Password is Required').escape(),
+    param('id').exists().withMessage('Id is required').isMongoId().withMessage('Invalid Id'),
+    param('token').trim().notEmpty().withMessage('Token is Required')
   ]
 }
 
